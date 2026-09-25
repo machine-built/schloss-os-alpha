@@ -9,6 +9,8 @@ io.github.flattool.Warehouse
 org.videolan.VLC
 im.riot.Riot
 one.ablaze.floorp
+org.gnome.Evolution
+com.notesnook.Notesnook
 EOF
 
 # Remove system Flatpaks
