@@ -4,3 +4,4 @@ debug.toml
 build.log
 debug.toml
 cosign
+cosign.key
