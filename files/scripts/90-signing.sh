@@ -32,19 +32,19 @@ jq --arg image_registry "${IMAGE_REGISTRY}" \
     { ($image_registry + "/" + $image_name): [
         {
             "type": "sigstoreSigned",
-            "keyPaths": [$pki_path, $pki_backup],
+            "keyPath": [$pki_path, $pki_backup],
             "signedIdentity": {
                 "type": "matchRepository"
             }
         }
       ],
-      "": [{ "type": "insecureAcceptAnything"}]
+      "": [{ "type": "reject"}]
     }
     + .
     | .transports *= (["docker-daemon", "containers-storage", "dir", "oci", "oci-archive", "docker-archive", "tarball"]
-        | map({(.): {"": [{"type": "insecureAcceptAnything"}]}})
+        | map({(.): {"": [{"type": "reject"}]}})
         | add)
-    | .default[0].type = "insecureAcceptAnything"' "${POLICY_FILE}" > "/tmp/POLICY.tmp"
+    | .default[0].type = "reject"' "${POLICY_FILE}" > "/tmp/POLICY.tmp"
 
 mv "/tmp/POLICY.tmp" "${POLICY_FILE}"
 
